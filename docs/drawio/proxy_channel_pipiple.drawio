@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net" modified="2024-06-22T15:17:33.089Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="9FuwLxL5lgkEJBU93ICF" version="24.6.2" type="device">
+  <diagram name="第 1 页" id="2Xx5L-Cbhilntyg-FDVe">
+    <mxGraphModel dx="1413" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-2" value="应用" style="whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="95" y="250" width="190" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-6" value="应用" style="whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="350" y="230" width="530" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5N9lfwWvdCw7qUVIetyk-9" target="5N9lfwWvdCw7qUVIetyk-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-12" value="1. 请求参数修改&lt;br&gt;2. clientChannel缓存&lt;br&gt;3. serverchannel 缓存复用" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="5N9lfwWvdCw7qUVIetyk-11">
+          <mxGeometry x="0.0205" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-9" value="Server&lt;br&gt;接受请求并且处理" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="272.5" width="140" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-7" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="310" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-1" value="requestB" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="325" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-3" value="requestA" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="325" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-4" value="request" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="405" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-8" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5N9lfwWvdCw7qUVIetyk-10" target="5N9lfwWvdCw7qUVIetyk-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="940" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-10" value="Client&lt;br&gt;将处理好的请求重新转发正确的目的地" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="687" y="272.5" width="140" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-14" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="910" y="340" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5N9lfwWvdCw7qUVIetyk-15" value="Http/1&amp;nbsp; &amp;nbsp;(http/2)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="160" width="110" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
