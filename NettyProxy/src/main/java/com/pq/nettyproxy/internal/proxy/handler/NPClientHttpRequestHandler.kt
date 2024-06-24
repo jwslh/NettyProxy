@@ -36,6 +36,7 @@ internal class NPClientHttpRequestHandler(
         val channel = ctx.channel()
 
         // 先找到 serverChannelPool 中的所有call
+        serverChannelPool.notifyChannelClosed(channel)
 
         super.channelInactive(ctx)
     }

@@ -38,7 +38,11 @@ internal class NPServerChannelPool(
 
     fun idleConnectionCount(): Int {
         return channels.count {
-            synchronized(it) { it.calls.isEmpty() }
+            synchronized(it) {
+                synchronized(it.calls) {
+                    it.calls.isEmpty()
+                }
+            }
         }
     }
 
@@ -83,7 +87,9 @@ internal class NPServerChannelPool(
                 is HttpContent -> msg.retain()
                 else -> return
             }
-            it.calls.firstOrNull()?.forClientChannel?.writeAndFlush(realMsg)
+            synchronized(it.calls) {
+                it.calls.firstOrNull()?.forClientChannel?.writeAndFlush(realMsg)
+            }
         }
     }
 

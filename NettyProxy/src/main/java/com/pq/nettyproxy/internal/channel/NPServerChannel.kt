@@ -21,16 +21,18 @@ internal class NPServerChannel(
     val calls = mutableListOf<NPCall>()
 
     fun isEligible(host: String, port: Int): Boolean {
+
+        if (disable) {
+            return false
+        }
+
         synchronized(calls) {
             if (disable || calls.size >= allocationLimit || !rawChannel.isActive) {
                 return false
             }
         }
 
-        if (route.host != host || route.port != port) {
-            return false
-        }
-        return true
+        return !(route.host != host || route.port != port)
     }
 
     fun writeAndFlush(msg: Any): ChannelFuture {
@@ -54,6 +56,12 @@ internal class NPServerChannel(
             }
             disable = true
             calls.clear()
+        }
+    }
+
+    fun removeCall(call: NPCall) {
+        synchronized(calls) {
+            calls.remove(call)
         }
     }
 }

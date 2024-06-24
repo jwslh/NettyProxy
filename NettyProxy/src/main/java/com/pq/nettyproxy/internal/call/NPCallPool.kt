@@ -24,6 +24,8 @@ internal class NPHttpCallPool {
     }
 
     fun remove(channel: Channel) {
-        calls.remove(channel)
+        calls.remove(channel)?.let {
+            it.getServerChannel()?.removeCall(it)
+        }
     }
 }

@@ -33,13 +33,6 @@ internal class NPServerHttpRequestHandler(
     override fun channelInactive(ctx: ChannelHandlerContext?) {
 
         ctx ?: return
-        callPool.getCallForChannel(ctx.channel())?.let {
-            it.getServerChannel()?.calls?.let { calls ->
-                synchronized(calls) {
-                    calls.remove(it)
-                }
-            }
-        }
         callPool.remove(ctx.channel())
         super.channelInactive(ctx)
     }
