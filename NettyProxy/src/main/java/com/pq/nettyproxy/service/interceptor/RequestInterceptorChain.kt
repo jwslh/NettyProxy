@@ -7,7 +7,7 @@ package com.pq.nettyproxy.service.interceptor
 internal object RequestInterceptorChain {
     fun defaultChain(): AbsRequestInterceptor {
         val first = PreCheckInterceptor()
-
+        first.next(TransmitterInterceptor())
         return first
     }
 }

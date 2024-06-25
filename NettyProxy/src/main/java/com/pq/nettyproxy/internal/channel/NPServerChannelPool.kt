@@ -9,10 +9,7 @@ import io.netty.handler.codec.http.HttpRequest
 import java.util.Timer
 import java.util.TimerTask
 import java.util.concurrent.ConcurrentLinkedQueue
-import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.concurrent.read
 import kotlin.concurrent.thread
-import kotlin.concurrent.write
 
 /**
  * 用于缓存 proxy 和 云端之间的 channel，减少连接耗时
@@ -23,6 +20,9 @@ internal class NPServerChannelPool(
     private val maxIdleChannels: Int = 10,
 ) {
     private val channels = ConcurrentLinkedQueue<NPServerChannel>()
+
+    @Volatile
+    private var mEnableReuse = false
 
     init {
         thread {
@@ -54,6 +54,11 @@ internal class NPServerChannelPool(
         call: NPCall,
         requireMultiplexed: Boolean = false,
     ): Boolean {
+
+        if (!mEnableReuse) {
+            return false
+        }
+
         for (channel in channels) {
             synchronized(channel) {
                 if (requireMultiplexed && !channel.isMultiplexed) return@synchronized

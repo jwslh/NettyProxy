@@ -10,7 +10,7 @@ import io.netty.handler.codec.http.HttpObject
  * @author  calesq
  * @date    2024/6/23
  **/
-internal class NPClientHttpRequestHandler(
+internal class NPProxyHttpRequestHandler(
     val serverChannelPool: NPServerChannelPool
 ) : SimpleChannelInboundHandler<HttpObject>() {
 

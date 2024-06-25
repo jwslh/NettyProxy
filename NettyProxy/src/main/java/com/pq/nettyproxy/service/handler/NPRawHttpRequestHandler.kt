@@ -11,7 +11,7 @@ import io.netty.handler.codec.http.HttpObject
  * @author  calesq
  * @date    2024/6/23
  **/
-internal class NPServerHttpRequestHandler(
+internal class NPRawHttpRequestHandler(
     private val callPool: NPHttpCallPool
 ) : SimpleChannelInboundHandler<HttpObject>() {
 

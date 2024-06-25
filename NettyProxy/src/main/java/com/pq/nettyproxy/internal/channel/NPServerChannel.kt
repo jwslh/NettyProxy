@@ -15,19 +15,13 @@ internal class NPServerChannel(
     val isMultiplexed: Boolean = false,
 ) {
     private var allocationLimit = 1
-    @Volatile
-    private var disable = false
 
     val calls = mutableListOf<NPCall>()
 
     fun isEligible(host: String, port: Int): Boolean {
 
-        if (disable) {
-            return false
-        }
-
         synchronized(calls) {
-            if (disable || calls.size >= allocationLimit || !rawChannel.isActive) {
+            if (calls.size >= allocationLimit || !rawChannel.isActive) {
                 return false
             }
         }
@@ -45,8 +39,8 @@ internal class NPServerChannel(
 
     fun isActive() = rawChannel.isActive
 
-    fun isTargetChannel(channel: Channel): Boolean {
-        return channel == rawChannel
+    fun isTargetChannel(serverChannel: Channel): Boolean {
+        return serverChannel == rawChannel
     }
 
     fun notifyChannelClosed() {
@@ -54,7 +48,6 @@ internal class NPServerChannel(
             calls.forEach {
                 it.forClientChannel.close().sync()
             }
-            disable = true
             calls.clear()
         }
     }

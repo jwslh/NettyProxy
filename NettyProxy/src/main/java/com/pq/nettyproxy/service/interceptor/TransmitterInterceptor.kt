@@ -19,6 +19,17 @@ internal class TransmitterInterceptor : AbsRequestInterceptor() {
     }
 
     private fun connect(requestPackage: RequestPackage): NPServerChannel {
+
+        if (requestPackage.msg is HttpRequest) {
+            // 当前clientChannel是被复用的，之前存在请求,直接尝试复用 serverChannelPool 中缓存的已经存在的serverChannel
+            requestPackage.callPool.getCallForChannel(requestPackage.channel)?.getServerChannel()?.let {
+                val call = requestPackage.call
+                if (call != null && it.isEligible(call.host, call.port)) {
+                    call.acquireConnection(it)
+                }
+            }
+        }
+
         return NPClientManager.get().findChannel(requestPackage.tryGetCall())
     }
 

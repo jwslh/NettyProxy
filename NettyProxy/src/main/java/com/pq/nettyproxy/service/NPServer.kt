@@ -2,7 +2,7 @@ package com.pq.nettyproxy.service
 
 import com.pq.common.utils.NPLog
 import com.pq.nettyproxy.internal.call.NPHttpCallPool
-import com.pq.nettyproxy.service.handler.NPServerHttpRequestHandler
+import com.pq.nettyproxy.service.handler.NPRawHttpRequestHandler
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption
@@ -54,7 +54,7 @@ class NPServer private constructor(builder: Builder){
                             addLast(mSslContext.newHandler(ch.alloc())) // 自签名证书配置SSL，支持HTTPS通信
                             addLast(HttpServerCodec())
                             addLast(ChunkedWriteHandler())
-                            addLast(NPServerHttpRequestHandler(callPool))
+                            addLast(NPRawHttpRequestHandler(callPool))
                         }
                     }
                 })

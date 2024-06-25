@@ -5,9 +5,10 @@ import com.pq.nettyproxy.internal.call.NPCall
 import com.pq.nettyproxy.internal.call.NPRoute
 import com.pq.nettyproxy.internal.channel.NPServerChannel
 import com.pq.nettyproxy.internal.channel.NPServerChannelPool
-import com.pq.nettyproxy.internal.proxy.handler.NPClientHttpRequestHandler
+import com.pq.nettyproxy.internal.proxy.handler.NPProxyHttpRequestHandler
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelInitializer
+import io.netty.channel.ChannelOption
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.http.HttpClientCodec
@@ -41,6 +42,7 @@ internal class NPClient private constructor(builder: Builder) {
 
             bootstrap.group(workerEventLoopGroup)
                 .channel(NioSocketChannel::class.java)
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10_000) // 10s的请求连接时间
                 .handler(object : ChannelInitializer<NioSocketChannel>() {
                     override fun initChannel(ch: NioSocketChannel?) {
                         ch ?: return
@@ -48,7 +50,7 @@ internal class NPClient private constructor(builder: Builder) {
                             addLast(sslContext.newHandler(ch.alloc()))
                             addLast(HttpClientCodec())
                             addLast(ChunkedWriteHandler())
-                            addLast(NPClientHttpRequestHandler(mServerChannelPool))
+                            addLast(NPProxyHttpRequestHandler(mServerChannelPool))
                         }
                     }
                 })

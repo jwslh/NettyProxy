@@ -10,12 +10,14 @@ internal data class NPCall(
     val isProxyRequest: Boolean = false,
     val proxyHost: String = "",
     val proxyPort: Int = 0,
-) {
     @Volatile
     private var mServerChannel: NPServerChannel? = null
+) {
+
     fun acquireConnection(channel: NPServerChannel) {
         mServerChannel = channel
         synchronized(channel.calls) {
+            channel.calls.clear()
             channel.calls.add(this)
         }
     }
